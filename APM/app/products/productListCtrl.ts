@@ -2,14 +2,14 @@ module app.productList {
     interface IProductListModel {
         title: string;
         showImage: boolean;
-        products: any[];
+        products: app.domain.IProduct[];
         toggleImage(): void;
     }
 
     class ProductListCtrl implements IProductListModel {
         title: string;
         showImage: boolean;
-        products: any[];
+        products: app.domain.IProduct[];
 
         constructor() {
             this.title = "Product List";
@@ -44,6 +44,13 @@ module app.productList {
                 }
             ];
 
+             var newProduct = new app.domain.Product(3, "Saw", "TBX-002", 
+                                                    new Date(2002, 3,1), 16.95, 
+                                                    "15-inch steel blade band saw", 
+                                                    "http://openclipart.org/image/300px/svg_to_png/27070/egopre911_saw.png");
+
+            newProduct.price = newProduct.calculateDiscount(10);
+            this.products.push(newProduct)
         }
 
         toggleImage(): void {
